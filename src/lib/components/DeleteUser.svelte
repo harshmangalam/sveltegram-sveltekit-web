@@ -3,21 +3,17 @@
 
   import { auth } from "$lib/store/auth";
   import { snackbar } from "$lib/store/ui";
-  import { mdiDelete, mdiPencil } from "@mdi/js";
+  import { mdiDelete } from "@mdi/js";
   import { onMount } from "svelte";
 
   import {
-    Avatar,
     Button,
     Card,
     CardActions,
     CardText,
     CardTitle,
-    Container,
     Dialog,
     Icon,
-    Textarea,
-    TextField,
   } from "svelte-materialify";
   let active = false;
 

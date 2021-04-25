@@ -1,7 +1,7 @@
 <script>
   import { snackbar } from "$lib/store/ui";
   import { onMount } from "svelte";
-  import { mdiArrowLeft, mdiArrowRight, mdiImage, mdiPlus } from "@mdi/js";
+  import { mdiArrowLeft, mdiArrowRight, mdiImage } from "@mdi/js";
   import {
     Button,
     Col,
@@ -13,10 +13,14 @@
 
   import { post } from "$lib/store/post";
   import { goto } from "$app/navigation";
+import { auth } from "$lib/store/auth";
 
   let axiosApi;
 
   onMount(async () => {
+    if(! $auth.isAuthenticated){
+      goto("/login")
+    }
     axiosApi = await import("$lib/utils/axiosApi");
   });
 

@@ -21,6 +21,9 @@
   let api;
 
   onMount(async () => {
+    if($auth.isAuthenticated){
+      goto("/")
+    }
     api = await import("$lib/utils/axiosApi");
   });
 

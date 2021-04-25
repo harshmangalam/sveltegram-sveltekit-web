@@ -1,15 +1,12 @@
 <script>
-  import { Button, Col, Footer, Row } from "svelte-materialify";
+  import { Footer } from "svelte-materialify";
 
-  import { darkMode, theme } from "$lib/store/ui";
-
-  import { goto } from "$app/navigation";
-  import { mdiFacebook, mdiInstagram, mdiLinkedin, mdiTwitter } from "@mdi/js";
+  import { theme } from "$lib/store/ui";
 </script>
 
 <Footer padless class="theme-{theme}  justify-center flex-column">
   <div class="theme-{theme} pa-2 text-center" style="width:100%">
-    {new Date().getFullYear()}
+    {new Date().getFullYear()} &copy;
     <b>Sveltegram</b>
   </div>
 </Footer>

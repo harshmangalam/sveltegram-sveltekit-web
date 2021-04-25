@@ -1,18 +1,10 @@
 <script>
-  import {
-    mdiAccount,
-    mdiEmail,
-    mdiEye,
-    mdiEyeOff,
-    mdiFacebook,
-    mdiLock,
-  } from "@mdi/js";
+  import { mdiAccount, mdiEmail, mdiEye, mdiEyeOff, mdiLock } from "@mdi/js";
 
   import {
     Button,
     Card,
     Col,
-    Divider,
     Icon,
     ProgressCircular,
     Row,
@@ -22,10 +14,14 @@
   import { onMount } from "svelte";
   import { emailRules, passwordRules } from "$lib/utils/validation";
   import { goto } from "$app/navigation";
+import { auth } from "$lib/store/auth";
 
   let axiosApi;
 
   onMount(async () => {
+    if ($auth.isAuthenticated) {
+      goto("/");
+    }
     axiosApi = await import("$lib/utils/axiosApi");
   });
 

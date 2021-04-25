@@ -1,6 +1,5 @@
 <script>
-  import { Subheader, Button, Icon, Row, Col } from "svelte-materialify";
-  import { mdiArrowLeft } from "@mdi/js";
+  import { Row, Col } from "svelte-materialify";
 
   export let posts;
 </script>

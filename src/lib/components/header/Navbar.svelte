@@ -12,7 +12,6 @@
     Overlay,
   } from "svelte-materialify";
   import DrawerList from "./DrawerList.svelte";
-  import { goto } from "$app/navigation";
   import { onMount } from "svelte";
 
   let axiosApi;
@@ -34,7 +33,7 @@
       });
       if (res.type === "success") {
         auth.removeUser();
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

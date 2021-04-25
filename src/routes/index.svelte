@@ -43,7 +43,6 @@
   let totalPage = posts.data.pagination.totalPage;
   let loading = false;
 
-  $: console.log(page, totalPage);
   onMount(async () => {
     api = await import("$lib/utils/axiosApi");
   });
