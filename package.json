@@ -7,7 +7,6 @@
     "start": "svelte-kit start"
   },
   "devDependencies": {
-    "@sveltejs/adapter-vercel": "next",
     "@sveltejs/adapter-node": "next",
     "@sveltejs/kit": "next",
     "sass": "^1.0.0",
