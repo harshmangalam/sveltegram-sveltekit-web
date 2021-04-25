@@ -24,23 +24,14 @@
   import { BASE_URL } from "$lib/config";
   import { auth } from "$lib/store/auth";
   import { snackbar } from "$lib/store/ui";
-  import { mdiDelete, mdiPencil } from "@mdi/js";
-  import {
-    Avatar,
-    Col,
-    Row,
-    Chip,
-    Divider,
-    Button,
-    Icon,
-  } from "svelte-materialify";
+  import { Avatar, Col, Row, Chip, Divider, Button } from "svelte-materialify";
   import EditUser from "$lib/components/EditUser.svelte";
   import DeleteUser from "$lib/components/DeleteUser.svelte";
 
-  let axiosApi;
+  let api;
 
   onMount(async () => {
-    axiosApi = await import("$lib/utils/axiosApi");
+    api = await import("$lib/utils/axiosApi");
   });
 
   export let user;
@@ -48,8 +39,8 @@
 
   async function handleFollow() {
     try {
-      const res = await axiosApi.followUser(user._id);
-      snackbar.showSnackbar({ open: true, msg: res.message, type: res.type });
+      const res = await api.followUser(user._id);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -57,8 +48,8 @@
 
   async function handleUnFollow() {
     try {
-      const res = await axiosApi.unFollowuser(user._id);
-      snackbar.showSnackbar({ open: true, msg: res.message, type: res.type });
+      const res = await api.unFollowuser(user._id);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -74,6 +65,9 @@
   };
 </script>
 
+<svelte:head>
+  <title>{user.name} | Sveltegram</title>
+</svelte:head>
 <div style="max-width:1200px ;margin: auto;">
   <Row style="margin:auto ">
     <Col sm={12} cols={12} md={8} offset_md={2}>

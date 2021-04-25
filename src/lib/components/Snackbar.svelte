@@ -13,6 +13,7 @@
   right
   timeout={3000}
   class="{$snackbar.type}-color d-flex justify-space-between"
+  style="position: fixed"
 >
   <span class="font-weight-bold">
     {$snackbar.msg}

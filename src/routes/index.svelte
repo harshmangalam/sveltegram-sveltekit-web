@@ -1,45 +1,76 @@
+<script context="module">
+  import { BASE_URL } from "$lib/config";
+
+  export async function load({ fetch }) {
+    const posts = await fetch(`${BASE_URL}/api/post?page=0&limit=3`);
+    const users = await fetch(`${BASE_URL}/api/user?page=0&limit=5`);
+    const res = await Promise.all([posts, users]);
+
+    return {
+      props: {
+        posts: await res[0].json(),
+        users: await res[1].json(),
+      },
+    };
+  }
+</script>
+
 <script>
   import PostCard from "$lib/components/post/PostCard.svelte";
   import UserSideProfile from "$lib/components/UserSideProfile.svelte";
   import UserSuggestions from "$lib/components/UserSuggestions.svelte";
   import { auth } from "$lib/store/auth";
-  import { Button, Card, Col, Icon, Row } from "svelte-materialify";
-  import { onMount } from "svelte";
+  import {
+    Button,
+    Card,
+    Col,
+    Icon,
+    ProgressCircular,
+    Row,
+  } from "svelte-materialify";
   import { post as postState } from "$lib/store/post";
   import { mdiPlus } from "@mdi/js";
   import { goto } from "$app/navigation";
   import { user } from "$lib/store/user";
+  import { onMount } from "svelte";
 
-  let axiosApi;
+  export let posts;
+  export let users;
 
+  let api;
+  let page = 0;
+  let limit = 3;
+  let totalPage = posts.data.pagination.totalPage;
+  let loading = false;
+
+  $: console.log(page, totalPage);
   onMount(async () => {
-    axiosApi = await import("$lib/utils/axiosApi");
-    await loadPosts();
-    await loadUsers();
+    api = await import("$lib/utils/axiosApi");
   });
 
-  async function loadPosts() {
-    try {
-      const res = await axiosApi.getAllPosts({ page: 0, limit: 5 });
-      if (res.type === "success") {
-        postState.addPosts(res.data.posts);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  postState.addPosts(posts.data.posts);
 
-  async function loadUsers() {
+  user.addUsers(users.data.users);
+
+  async function loadMore() {
     try {
-      const res = await axiosApi.getUsers({ page: 0, limit: 5 });
+      loading = true;
+      page = page + 1;
+      const res = await api.getAllPosts({ page, limit });
       if (res.type === "success") {
-        user.addUsers(res.data.users);
+        postState.addMorePosts(res.data.posts);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      loading = false;
     }
   }
 </script>
+
+<svelte:head>
+  <title>Home | Sveltegram</title>
+</svelte:head>
 
 <div style="max-width:1200px ;margin: auto;">
   <Row style="margin:auto">
@@ -67,6 +98,18 @@
           <PostCard {post} />
         </div>
       {/each}
+
+      {#if totalPage >= page + 1}
+        <div class="d-flex justify-center">
+          <Button on:click={loadMore} class="blue white-text">
+            {#if loading}
+              <ProgressCircular indeterminate color="white" />
+            {:else}
+              Load More
+            {/if}
+          </Button>
+        </div>
+      {/if}
     </Col>
 
     <Col sm={12} md={4} class="d-none d-md-block">

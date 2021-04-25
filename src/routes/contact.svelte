@@ -1,3 +1,8 @@
+<script context="module">
+  export const hydrate = false;
+  export const prerender = true;
+</script>
+
 <script>
   import { goto } from "$app/navigation";
 
@@ -28,6 +33,10 @@
     },
   ];
 </script>
+
+<svelte:head>
+  <title>Contact | Sveltegram</title>
+</svelte:head>
 
 <Row>
   <Col cols={12} md={8} offset_md={2}>

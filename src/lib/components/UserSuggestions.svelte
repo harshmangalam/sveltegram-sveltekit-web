@@ -26,7 +26,7 @@
       <ListItem on:click={() => goto(`/profile/${user._id}`)}>
         <span slot="prepend">
           {#if user.profilePic}
-            <Avatar size={30}
+            <Avatar size={40}
               ><img src={user.profilePic} alt={user.name} /></Avatar
             >
           {:else}

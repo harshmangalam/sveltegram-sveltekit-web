@@ -87,7 +87,7 @@
       width="100%"
       height="500px"
       src={post.image}
-      alt="background"
+      alt={post.user.name}
     />
   {/if}
   <CardTitle>{post.title}</CardTitle>

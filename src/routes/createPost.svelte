@@ -44,6 +44,11 @@
   };
 </script>
 
+
+<svelte:head>
+  <title>Create Post | Sveltegram</title>
+</svelte:head>
+
 <Row>
   <Col cols={12} md={6} offset_md={3}>
     <div class="mt-16 mb-16">

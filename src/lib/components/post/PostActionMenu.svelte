@@ -6,7 +6,7 @@
   import { snackbar } from "$lib/store/ui";
   import { post } from "$lib/store/post";
 
-  import { mdiCubeUnfolded, mdiDelete, mdiPencil } from "@mdi/js";
+  import { mdiDotsVertical, mdiDelete, mdiPencil } from "@mdi/js";
   import { goto } from "$app/navigation";
 
   let axiosApi;
@@ -39,7 +39,7 @@
   >
     <div slot="activator">
       <Button icon>
-        <Icon path={mdiCubeUnfolded} />
+        <Icon path={mdiDotsVertical} />
       </Button>
     </div>
     <List dense>

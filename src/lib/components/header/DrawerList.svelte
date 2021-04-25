@@ -4,11 +4,12 @@
 
   import {
     mdiAccount,
-    mdiAccountCircleOutline,
+    mdiAccountDetails,
     mdiContacts,
     mdiHome,
     mdiLogin,
     mdiNetwork,
+    mdiPlus,
   } from "@mdi/js";
 
   import { Avatar, Divider, Icon, List, ListItem } from "svelte-materialify";
@@ -16,7 +17,10 @@
   const links = [
     { name: "Login", icon: mdiLogin, to: "/login" },
     { name: "Signup", icon: mdiAccount, to: "/signup" },
+    { name: "Users", icon: mdiAccountDetails, to: "/users" },
   ];
+
+  const authLinks = [{ name: "Create Post", icon: mdiPlus, to: "/createPost" }];
 
   const pageLinks = [
     { name: "Home", icon: mdiHome, to: "/" },
@@ -64,4 +68,17 @@
       {link.name}
     </ListItem>
   {/each}
+
+  <Divider />
+
+  {#if $auth.isAuthenticated}
+    {#each authLinks as link}
+      <ListItem on:click={() => goto(link.to)}>
+        <span slot="prepend">
+          <Icon path={link.icon} />
+        </span>
+        {link.name}
+      </ListItem>
+    {/each}
+  {/if}
 </List>

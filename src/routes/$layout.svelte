@@ -1,6 +1,6 @@
 <script>
   import Navbar from "$lib/components/header/Navbar.svelte";
-  import { Container, MaterialApp } from "svelte-materialify";
+  import { Container, MaterialApp, ProgressCircular } from "svelte-materialify";
   import { snackbar, theme } from "$lib/store/ui";
   import Footer from "$lib/components/footer/index.svelte";
   import { onMount } from "svelte";
@@ -9,33 +9,46 @@
   import { goto } from "$app/navigation";
   import { BASE_URL } from "$lib/config";
 
+  import { navigating } from "$app/stores";
+  import NavigationLoading from "$lib/components/NavigationLoading.svelte";
+
   onMount(async () => {
-    let axios = await import("axios");
-    let {createAxios} = await import("$lib/utils/axiosApi")
-   
-    axios.defaults.baseURL = BASE_URL;
-    axios.defaults.withCredentials = true;
+    try {
+      let axios = await import("axios");
 
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      try {
-        const res = await axios.get("/api/auth/me");
+      axios.defaults.baseURL = BASE_URL;
+      axios.defaults.withCredentials = true;
 
-        if (res.data.type === "success") {
-          auth.setUser({ user: res.data.data.user, token });
+      const token = localStorage.getItem("token");
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+        try {
+          const res = await axios.get("/api/auth/me");
+
+          if (res.data.type === "success") {
+            auth.setUser({ user: res.data.data.user, token });
+          }
+          if (res.data.type === "error") {
+            snackbar.showSnackbar({ ...res.data });
+            goto("/login");
+            return;
+          }
+        } catch (error) {
+          console.log(error);
         }
-        if (res.data.type === "error") {
-          snackbar.showSnackbar({ ...res.data });
-          goto("/login");
-          return;
-        }
-      } catch (error) {
-        console.log(error);
       }
+    } catch (error) {
+      console.log(error);
     }
   });
 </script>
+
+<svelte:head>
+  <meta
+    name="description"
+    content="Sveltegram higly efficient instagram clone in sveltekit and material design"
+  />
+</svelte:head>
 
 <MaterialApp theme={$theme}>
   <div
@@ -46,7 +59,7 @@
       <Navbar />
     </nav>
 
-    <main style="flex-grow: 1">
+    <main class="flex-grow-1">
       <Container>
         <slot />
       </Container>
@@ -55,4 +68,5 @@
     <Footer />
   </div>
   <Snackbar />
+  <NavigationLoading active={$navigating} />
 </MaterialApp>

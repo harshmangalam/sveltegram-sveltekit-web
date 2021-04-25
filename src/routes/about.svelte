@@ -1,6 +1,15 @@
+<script context="module">
+  export const hydrate = false;
+  export const prerender = true;
+</script>
+
 <script>
   import { Avatar } from "svelte-materialify";
 </script>
+
+<svelte:head>
+  <title>About | Sveltegram</title>
+</svelte:head>
 
 <div
   style="display: flex;flex-direction: column;justify-content: center;align-items: center;"

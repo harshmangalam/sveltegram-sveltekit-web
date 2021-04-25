@@ -2,15 +2,14 @@ import { writable, derived } from "svelte/store";
 
 const { set, subscribe, update } = writable({
   posts: [],
-  loading: false,
 });
 
 const createPost = () => {
   return {
     subscribe,
-    setLoading: (v) => update((p) => ({ posts: p.posts, loading: v })),
     addPosts: (data) => set({ posts: data }),
     addPost: (data) => update((p) => ({ posts: [data, ...p.posts] })),
+    addMorePosts: (data) => update((p) => ({ posts: [...p.posts, ...data] })),
     removePost: (postId) =>
       update((p) => {
         let filterPost = p.posts.filter((p) => p._id != postId);

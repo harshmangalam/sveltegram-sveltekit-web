@@ -1,14 +1,8 @@
 import { BASE_URL } from "$lib/config";
-import { post } from "$lib/store/post";
 import axios from "axios";
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.withCredentials = true;
-
-const token = localStorage.getItem("token");
-if (token) {
-  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-}
 
 export const loginUser = async (data) => {
   try {
@@ -96,6 +90,15 @@ export const getUsers = async ({ page = 0, limit = 5 }) => {
   }
 };
 
+export const searchUsers = async (search) => {
+  try {
+    const res = await axios.get(`/api/user?search=${search}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const followUser = async (userId) => {
   try {
     const token = localStorage.getItem("token");
@@ -151,12 +154,29 @@ export const updatePost = async (postId, data) => {
 
 export const getAllPosts = async ({ page = 0, limit = 5 }) => {
   try {
-    post.setLoading(true);
     const res = await axios.get(`/api/post?page=${page}&limit=${limit}`);
-    post.setLoading(false);
+
     return res.data;
   } catch (error) {
-    post.setLoading(false);
+    return error.response.data;
+  }
+};
+
+export const explorePosts = async ({ page = 0, limit = 5 }) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await axios.get(
+      `/api/post/explore?page=${page}&limit=${limit}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  } catch (error) {
     return error.response.data;
   }
 };

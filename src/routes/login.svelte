@@ -1,13 +1,6 @@
 <script>
   import { emailRules, passwordRules } from "$lib/utils/validation";
-  import {
-    mdiEmail,
-    mdiEye,
-    mdiEyeOff,
-    mdiFacebook,
-    mdiLock,
-    mdiLogin,
-  } from "@mdi/js";
+  import { mdiEmail, mdiEye, mdiEyeOff, mdiLock } from "@mdi/js";
   import { onMount } from "svelte";
 
   import {
@@ -16,6 +9,7 @@
     Col,
     Divider,
     Icon,
+    ProgressCircular,
     Row,
     TextField,
   } from "svelte-materialify";
@@ -23,10 +17,11 @@
   import { snackbar } from "$lib/store/ui";
   import { goto } from "$app/navigation";
   import { auth } from "$lib/store/auth";
-  let axiosApi;
+
+  let api;
 
   onMount(async () => {
-    axiosApi = await import("$lib/utils/axiosApi");
+    api = await import("$lib/utils/axiosApi");
   });
 
   let show = false;
@@ -34,11 +29,14 @@
   let password = "";
 
   let error = {};
+  let loading = false;
 
   async function handleLogin() {
     try {
-      const res = await axiosApi.loginUser({ email, password });
+      loading = true;
+      const res = await api.loginUser({ email, password });
 
+      loading = false;
       snackbar.showSnackbar({
         open: true,
         type: res.type,
@@ -60,6 +58,12 @@
     }
   }
 </script>
+
+<svelte:head>
+  <title>Login | Sveltegram</title>
+</svelte:head>
+
+
 
 <Row>
   <Col xl={4} lg={6} md={8} sm={12} offset_xl={4} offset_lg={3} offset_md={2}>
@@ -110,15 +114,24 @@
           Password
         </TextField>
 
-        <Button
-          size="large"
-          block
-          type="submit"
-          tile
-          class="blue white-text mt-4"
-        >
-          Login
-        </Button>
+        <div class={loading && "d-flex justify-center"}>
+          <Button
+            disabled={loading}
+            size="large"
+            block={!loading}
+            type="submit"
+            rounded={loading}
+            fab={loading}
+            tile
+            class="blue white-text mt-4"
+          >
+            {#if loading}
+              <ProgressCircular color="white" indeterminate />
+            {:else}
+              Login
+            {/if}
+          </Button>
+        </div>
       </form>
 
       <!-- divider  -->

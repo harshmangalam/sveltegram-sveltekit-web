@@ -14,6 +14,7 @@
     Col,
     Divider,
     Icon,
+    ProgressCircular,
     Row,
     TextField,
   } from "svelte-materialify";
@@ -35,8 +36,11 @@
   let email = "";
   let password = "";
 
+  let loading = false;
+
   async function handleSignup() {
     try {
+      loading = true;
       const res = await axiosApi.signupUser({ name, email, password });
 
       snackbar.showSnackbar({
@@ -55,9 +59,15 @@
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      loading = false;
     }
   }
 </script>
+
+<svelte:head>
+  <title>Signup | Sveltegram</title>
+</svelte:head>
 
 <Row>
   <Col xl={4} lg={6} md={8} sm={12} offset_xl={4} offset_lg={3} offset_md={2}>
@@ -123,15 +133,25 @@
           Password
         </TextField>
 
-        <Button
-          size="large"
-          block
-          type="submit"
-          tile
-          class="blue white-text mt-4"
-        >
-          Sign up
-        </Button>
+        <div class={loading && "d-flex justify-center"}>
+          <Button
+            disabled={loading}
+            size="large"
+            block={!loading}
+            type="submit"
+            rounded={loading}
+            fab={loading}
+            tile
+            class="blue white-text mt-4"
+          >
+            {#if loading}
+              <ProgressCircular color="white" indeterminate />
+            {:else}
+              Sign Up
+            {/if}
+          </Button>
+        </div>
+
         <p class="mt-4 mb-4">
           By signing up, you agree to our Terms , Data Policy and Cookies Policy
           .
