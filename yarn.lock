@@ -15,10 +15,27 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@sveltejs/adapter-static@next":
-  version "1.0.0-next.6"
-  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-static/-/adapter-static-1.0.0-next.6.tgz#e189132115e7d28e61e345e9ce2a26ddc4d83b56"
-  integrity sha512-6TF2X/ARSo0bjoV3bh0kctcW9JYkLSb1cNdGSF0Mx26A9lSYyzftKUzLOFa/2hbLFseqf+FJYLeJtN9WOnII7A==
+"@sveltejs/adapter-node@next":
+  version "1.0.0-next.16"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-node/-/adapter-node-1.0.0-next.16.tgz#69da2d4d9911bdf4a93eeed881d28130d26456be"
+  integrity sha512-XXZtiyX8dT1shmiKF2DwB2mCrMrUzFVRItYAV0B3BFF+U5775hpNS5krgtZnJdbA1AoW0Ay2OT+u6MKeQ5/KUQ==
+
+"@sveltejs/adapter-vercel@next":
+  version "1.0.0-next.14"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-vercel/-/adapter-vercel-1.0.0-next.14.tgz#bfd030f12ba90e0b86c48dfd7eb1cbee06264e83"
+  integrity sha512-6/8AmXfmjEBpgVtzvd6bFaKYd9RzBauUo+qMfmYV2hw/lvfe+TdJOzfJrSRfm5tj5ZCBMebMPqMBV27+9i3zqw==
+  dependencies:
+    "@sveltejs/kit" "1.0.0-next.85"
+    esbuild "^0.11.12"
+
+"@sveltejs/kit@1.0.0-next.85":
+  version "1.0.0-next.85"
+  resolved "https://registry.yarnpkg.com/@sveltejs/kit/-/kit-1.0.0-next.85.tgz#2b3c12ac5a73ee6913c9e4a3367732c6c0627505"
+  integrity sha512-hurjQxSObSDqX9RgKFBPRuDfCnGlEy8hg24g6SezV1grUV+qJ5JTNPxwQw75nOS11z67ZaHWwglw64OvqSBLgA==
+  dependencies:
+    "@sveltejs/vite-plugin-svelte" "^1.0.0-next.7"
+    cheap-watch "^1.0.3"
+    sade "^1.7.4"
 
 "@sveltejs/kit@next":
   version "1.0.0-next.75"
@@ -33,6 +50,20 @@
   version "1.0.0-next.6"
   resolved "https://registry.yarnpkg.com/@sveltejs/vite-plugin-svelte/-/vite-plugin-svelte-1.0.0-next.6.tgz#c1667af9b8245d31dcacc8a914221d817d6bc202"
   integrity sha512-P+skZslGT+zPXRH9SlEu21LXuFpkQITRcvQb/NRpZHrxj04VDRbuKwksOfq+vDHO/K4HWioXIAQoQnJ3oomItw==
+  dependencies:
+    "@rollup/pluginutils" "^4.1.0"
+    chalk "^4.1.0"
+    debug "^4.3.2"
+    hash-sum "^2.0.0"
+    require-relative "^0.8.7"
+    slash "^3.0.0"
+    source-map "^0.7.3"
+    svelte-hmr "^0.14.0"
+
+"@sveltejs/vite-plugin-svelte@^1.0.0-next.7":
+  version "1.0.0-next.7"
+  resolved "https://registry.yarnpkg.com/@sveltejs/vite-plugin-svelte/-/vite-plugin-svelte-1.0.0-next.7.tgz#77e7649ab6fd1452b3ccddd2ad8456c4d63a6026"
+  integrity sha512-ENvKYY36jrvFP7h1G87k5uOoEh5UM1m8n40J2duqV/R3wHnxfW81SCR1aXo+5CVU8Prm3/jtS4TWs8CUTqO1fw==
   dependencies:
     "@rollup/pluginutils" "^4.1.0"
     chalk "^4.1.0"
@@ -150,6 +181,11 @@ detect-indent@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
   integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
+
+esbuild@^0.11.12:
+  version "0.11.14"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.14.tgz#0f4beba211d6d23e2825f61a89ccff1eef96361b"
+  integrity sha512-ejheEPkqhq5y0LM9rG9e+3yDihPtqeeE4NZmG7VQiSGJ3CjO4HvPOHmhhttSksfSztjLAGo2+0/zSIvlqj4JOQ==
 
 esbuild@^0.9.3:
   version "0.9.7"
