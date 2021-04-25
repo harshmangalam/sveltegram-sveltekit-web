@@ -1,0 +1,1 @@
+const e=[e=>!!e||"Email must be required",e=>/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e)||"Email address must be valid"],s=[e=>!!e||"Password must be required",e=>{if(e.length<5)return"Password length must be larger than 6 character"}];export{e,s as p};

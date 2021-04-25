@@ -1,0 +1,1 @@
+import{C as s}from"./vendor-6f77cb67.js";const{set:o,subscribe:t,update:p}=s({posts:[]}),d={subscribe:t,addPosts:s=>o({posts:s}),addPost:s=>p((o=>({posts:[s,...o.posts]}))),addMorePosts:s=>p((o=>({posts:[...o.posts,...s]}))),removePost:s=>p((o=>({posts:o.posts.filter((o=>o._id!=s))}))),updatePost:s=>p((o=>({posts:o.posts.map((o=>o._id==s._id?s:o))})))};export{d as p};
