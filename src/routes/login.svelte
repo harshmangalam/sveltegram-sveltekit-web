@@ -80,8 +80,8 @@
       <!-- login form -->
       <form on:submit|preventDefault={handleLogin}>
         <TextField
-          error={Boolean(error.email)}
-          messages={error.email?.msg || ""}
+          error={Boolean(error?.email)}
+          messages={error?.email?.msg || ""}
           outlined
           clearable
           rules={emailRules}
@@ -98,8 +98,8 @@
           class="mt-2"
           outlined
           clearable
-          error={Boolean(error.password)}
-          messages={error.password?.msg || ""}
+          error={Boolean(error?.password)}
+          messages={error?.password?.msg || ""}
           type={show ? "text" : "password"}
           rules={passwordRules}
         >
