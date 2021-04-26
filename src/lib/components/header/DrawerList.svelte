@@ -17,7 +17,6 @@
   const links = [
     { name: "Login", icon: mdiLogin, to: "/login" },
     { name: "Signup", icon: mdiAccount, to: "/signup" },
-    { name: "Users", icon: mdiAccountDetails, to: "/users" },
   ];
 
   const authLinks = [{ name: "Create Post", icon: mdiPlus, to: "/createPost" }];
@@ -26,6 +25,7 @@
     { name: "Home", icon: mdiHome, to: "/" },
     { name: "About Us", icon: mdiNetwork, to: "/about" },
     { name: "Contact Us", icon: mdiContacts, to: "/contact" },
+{ name: "Users", icon: mdiAccountDetails, to: "/users" },
   ];
 </script>
 
